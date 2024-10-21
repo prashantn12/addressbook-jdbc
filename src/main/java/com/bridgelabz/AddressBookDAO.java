@@ -67,5 +67,24 @@ public class AddressBookDAO {
             e.printStackTrace();
         }
     }
+
+
+    public void deleteContact(int id) {
+        String query = "DELETE FROM contacts WHERE id = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, id);
+
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("Contact deleted successfully.");
+            } else {
+                System.out.println("Contact not found with ID: " + id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

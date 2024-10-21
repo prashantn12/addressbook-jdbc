@@ -13,6 +13,9 @@ public class AddressBookApp {
 
             // Update a contact's phone and email
             addressBookDAO.updateContact(2, "8626045676", "john.doe@example.com");
+
+            // Delete a contact by ID
+            addressBookDAO.deleteContact(2);
             
         }
     }
