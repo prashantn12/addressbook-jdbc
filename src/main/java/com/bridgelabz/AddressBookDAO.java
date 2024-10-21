@@ -1,8 +1,7 @@
 package com.bridgelabz;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+
 
 public class AddressBookDAO {
     public void addContact(String firstName, String lastName, String address, String city, String state, String zip, String phoneNumber, String email) {
@@ -21,6 +20,29 @@ public class AddressBookDAO {
 
             statement.executeUpdate();
             System.out.println("Contact added successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getAllContacts() {
+        String query = "SELECT * FROM contacts";
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                System.out.println("ID: " + resultSet.getInt("id"));
+                System.out.println("First Name: " + resultSet.getString("first_name"));
+                System.out.println("Last Name: " + resultSet.getString("last_name"));
+                System.out.println("Address: " + resultSet.getString("address"));
+                System.out.println("City: " + resultSet.getString("city"));
+                System.out.println("State: " + resultSet.getString("state"));
+                System.out.println("ZIP: " + resultSet.getString("zip"));
+                System.out.println("Phone: " + resultSet.getString("phone_number"));
+                System.out.println("Email: " + resultSet.getString("email"));
+                System.out.println();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
