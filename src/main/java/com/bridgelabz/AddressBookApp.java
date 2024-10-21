@@ -10,6 +10,9 @@ public class AddressBookApp {
             // Fetch all contacts
             System.out.println("Contacts in Address Book:");
             addressBookDAO.getAllContacts();
+
+            // Update a contact's phone and email
+            addressBookDAO.updateContact(2, "8626045676", "john.doe@example.com");
             
         }
     }

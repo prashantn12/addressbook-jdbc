@@ -46,6 +46,26 @@ public class AddressBookDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+    public void updateContact(int id, String phoneNumber, String email) {
+        String query = "UPDATE contacts SET phone_number = ?, email = ? WHERE id = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, phoneNumber);
+            statement.setString(2, email);
+            statement.setInt(3, id);
+
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Contact updated successfully.");
+            } else {
+                System.out.println("Contact not found with ID: " + id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 
